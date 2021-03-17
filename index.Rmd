@@ -1,0 +1,59 @@
+--- 
+title: "ISLR Workbook"
+author: "Damian Thomas"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Notes and exercises from the book: An Introduction to Statistical Learning with Applications in R"
+---
+
+```{r include = FALSE}
+# Options
+knitr::opts_chunk$set(echo = FALSE)
+
+# Packages
+library(tidyverse)
+library(ISLR)
+
+# Get raw data from the R package
+data(Wage, Smarket, NCI60, package = "ISLR")
+
+
+# automatically create a bib database for R packages
+knitr::write_bib(c(.packages(), 'bookdown', 'knitr', 'rmarkdown'), 'packages.bib')
+```
+
+
+```{r download-data}
+# Download Data from ISLR website
+# https://www.statlearning.com/resources-first-edition
+
+datafiles <- c(
+    "Advertising.csv",
+    "Auto.data",
+    "Auto.csv",
+    "College.csv",
+    "Ch10Ex11.csv",
+    "Credit.csv",
+    "Income1.csv",
+    "Income2.csv",
+    "Heart.csv"
+)
+
+datadir <- "data/raw"
+dir.create(dirname(datadir), showWarnings = FALSE)
+
+Reduce(rbind, lapply(datafiles, function(x) {
+        url <- paste("https://www.statlearning.com/s", x, sep = "/")
+        file <- file.path(datadir, x)
+        if ( !file.exists(file) ) download.file(url, destfile = file)
+        file.info(file)[, c(1,4)]
+}))
+
+
+
+```
+

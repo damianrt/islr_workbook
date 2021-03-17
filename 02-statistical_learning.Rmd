@@ -1,0 +1,42 @@
+# Statistical Learning
+
+```{r include = FALSE}
+# Options
+knitr::opts_chunk$set(echo = FALSE)
+
+# Packages
+library(tidyverse)
+```
+
+
+```{r }
+Advertising <- read_csv(
+    file = "data/raw/Advertising.csv", skip = 1,
+    col_names = c("id", "TV", "radio", "newspaper", "sales"),
+    col_types = cols(
+        id = col_integer(),
+        TV = col_double(),
+        radio = col_double(),
+        newspaper = col_double(),
+        sales = col_double()
+    ))
+```
+
+```{r echo = TRUE}
+glimpse(Advertising)
+```
+
+
+```{r }
+Advertising %>%
+    select(sales, TV, radio, newspaper) %>%
+    pivot_longer(-sales, names_to = "media", values_to = "budget") %>%
+    ggplot(mapping = aes(x = budget, y = sales)) + 
+        geom_point() +
+        geom_smooth(formula = y ~ x, method = "lm", se = FALSE) +
+        facet_wrap(. ~ media, scales = "free") +
+        labs(title = "Performance in each market",
+             y = "Units Sold (thousands)",
+             x = "Advertising Spending (thousands of dollars)")
+```
+

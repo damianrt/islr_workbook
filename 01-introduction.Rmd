@@ -1,0 +1,66 @@
+# Introduction {#intro}
+
+```{r include = FALSE}
+# Options
+knitr::opts_chunk$set(echo = FALSE)
+
+# Packages
+library(tidyverse)
+library(ISLR)
+
+# Get raw data from the R package
+data(Wage, Smarket, NCI60, package = "ISLR")
+```
+
+A brief definition of statistical learning: "Broadly speaking, supervised statistical learning involves building a statistical model for predicting, or estimating, an *output* based on one or more *inputs*" (emphasis original). 
+
+Statistical Learning methods fall into two broad categories
+
+* Supervised learning methods use data to model a known output based on related inputs
+* Unsupervised learning methods find relationships between variables and structure in the data
+
+## Datasets 
+
+This chapter gives an overview of the data sets used in the book.
+
+### `Wage`
+
+Used for regression problem examples such as predicting wage based on age and education
+
+```{r echo = TRUE}
+glimpse(Wage)
+```
+
+### `Smarket`
+
+Used for classification problem examples such as predicting whether a stock index will increase or decrease on any given day
+
+```{r echo = TRUE}
+glimpse(Smarket)
+```
+
+
+### `NCI60` 
+
+Used for examples of clustering problems such as identifying related groups of cancer cells
+
+```{r echo = TRUE}
+str(NCI60)
+```
+
+
+```{r include = FALSE}
+# Output csv files locally
+
+if ( !file.exists("data/raw/Wage.csv") ) {
+    write_csv(Wage, "data/raw/Wage.csv")
+} 
+
+if ( !file.exists("data/raw/Smarket.csv") ) {
+    write_csv(Smarket, "data/raw/Smarket.csv")
+} 
+
+# if ( !file.exists("data/raw/NCI60.csv") ) {
+#     write_csv(NCI60, "data/raw/NCI60.csv")
+# } 
+```
