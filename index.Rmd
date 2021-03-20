@@ -1,14 +1,18 @@
 --- 
 title: "ISLR Workbook"
 author: "Damian Thomas"
-date: "`r Sys.Date()`"
+date: "2021"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-description: "Notes and exercises from the book: An Introduction to Statistical Learning with Applications in R"
+description: "My personal notes and exercise solutions for the book: An Introduction to Statistical Learning with Applications in R (website for the book: https://www.statlearning.com/)"
 ---
+
+# About {-#about}
+
+These are my personal notes and solutions for the exercises in the book: *An Introduction to Statistical Learning with Applications in R (1st edition)* by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani (website:  https://www.statlearning.com/)
 
 ```{r include = FALSE}
 # Options
@@ -27,7 +31,7 @@ knitr::write_bib(c(.packages(), 'bookdown', 'knitr', 'rmarkdown'), 'packages.bib
 ```
 
 
-```{r download-data}
+```{r download-data, include = FALSE}
 # Download Data from ISLR website
 # https://www.statlearning.com/resources-first-edition
 
@@ -47,10 +51,10 @@ datadir <- "data/raw"
 dir.create(dirname(datadir), showWarnings = FALSE)
 
 Reduce(rbind, lapply(datafiles, function(x) {
-        url <- paste("https://www.statlearning.com/s", x, sep = "/")
-        file <- file.path(datadir, x)
-        if ( !file.exists(file) ) download.file(url, destfile = file)
-        file.info(file)[, c(1,4)]
+    url <- paste("https://www.statlearning.com/s", x, sep = "/")
+    file <- file.path(datadir, x)
+    if ( !file.exists(file) ) download.file(url, destfile = file)
+    file.info(file)[, c(1,4)]
 }))
 
 
