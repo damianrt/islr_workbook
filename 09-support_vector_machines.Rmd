@@ -1,2 +1,2 @@
-# SUpport Vector Machines
+# Support Vector Machines
 
